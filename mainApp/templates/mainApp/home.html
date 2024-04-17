@@ -1,0 +1,30 @@
+{% extends 'mainApp/base.html' %}
+
+{% block title %}SkyGaze{% endblock %}
+{% block content %}
+{% load static %}
+  
+  <div id="hero-carousel" class="carousel slide carousel-fade carousel-container" data-bs-pause="{false}" data-bs-ride="carousel">
+    
+    <div class="carousel-inner">
+      <div class="carousel-item active c-item" data-bs-interval="3000">
+        <img src="https://images.unsplash.com/photo-1505580064377-8b7a8bf554c6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="d-block w-100 c-img">
+      </div>
+      <div class="carousel-item c-item" data-bs-interval="3000">
+        <img src="https://images.unsplash.com/photo-1488866022504-f2584929ca5f?q=80&w=2062&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="d-block w-100 c-img">
+      </div>
+      <div class="carousel-item c-item" data-bs-interval="3000">
+        <img src="https://images.unsplash.com/photo-1456154875099-97a3a56074d3?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="d-block w-100 c-img">
+      </div>
+    </div>
+    
+    <div class="carousel-caption d-none d-md-block mb-4">
+      <h1 class="display1 fw-bolder text-capitalize">Start Exploring</h1>
+      <h4 class="mt-4">Uncover the constellations visible from your location in real time.</h4>
+      <a name="gather-info" id="" class="btn btn-primary px-4 py-2 fs-5 mt-1 " data-bs-toggle="modal" data-bs-target="#date-coord-modal" href="#" role="start">
+        Start
+      </a>
+    </div>
+  </div>
+  
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'mainApp/base.html' %}
+
+
+{% block title %}Constellations{% endblock %}
+
+{% block content %}
+{% load static %}
+{% load filters %}
+
+    {% include 'mainApp/more_info_modal.html' %}
+    
+    <div class="text-white my-4">
+        <h1 style="text-align: center;">All 88 constellations:</h1>
+    </div>
+
+    <ul class="list-group container">
+        {% for elem in constells %}
+            {% if forloop.counter0|divisibleby:4 %}
+                </div>
+            {% endif %}
+
+            {% if forloop.counter0|divisibleby:4 or forloop.first %}
+                <div class="row justify-content-center align-items-center" data-bs-theme="dark">
+            {% endif %}
+                    {% include 'mainApp/obj_card.html' with elem=elem%}
+        {% endfor %}
+    </ul>
+
+{% endblock %}

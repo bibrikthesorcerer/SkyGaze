@@ -1,0 +1,75 @@
+{% extends 'mainApp/base.html' %}
+
+
+{% block title %}Observing Session{% endblock %}
+
+{% block content %}
+{% load static %}
+{% load filters %}
+    {% include 'mainApp/more_info_modal.html' %}
+    <div class="container text-center py-5">
+        <div class="row">
+            <!-- First Column -->
+            <div class="col-md-6 text-wrap py-5">
+                <h1 class="big-h1 py-5">Observation info</h1>
+            </div>
+            <!-- Second Column -->
+            <div class="col-md-6 align-items-center py-3">
+                <!-- Grid -->
+                <div class="row justify-content-center row-gap-3 column-gap-3" data-bs-theme="dark">
+                    <div class="card card-info col-md">
+                        <div class="card-body">
+                            <h5 class="card-title">Longtitude</h5>
+                            <p class="card-text">{{POST.Longtitude}}</p>
+                        </div>                    
+                    </div>
+                    <div class="card card-info col-md">
+                        <div class="card-body">
+                            <h5 class="card-title">Latitude</h5>
+                            <p class="card-text">{{POST.Latitude}}</p>
+                        </div>
+                    </div>
+                    <div class="card card-info col-md">
+                        <div class="card-body">
+                            <h5 class="card-title">Local Time</h5>
+                            <p class="card-text">{{POST.Local_Time}}</p>
+                        </div>
+                    </div>
+                    <div class="card card-info col-md">
+                        <div class="card-body">
+                            <h5 class="card-title">UTC Time</h5>
+                            <p class="card-text">{{POST.UTC_Time}}</p>
+                        </div>
+                    </div>
+                    <div class="card card-info col-md">
+                        <div class="card-body">
+                            <h5 class="card-title">Date</h5>
+                            <p class="card-text">{{POST.Date}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Nested Row -->
+            </div>
+        </div>
+    </div>
+
+
+    <!--Card grid-->
+    <div class="text-white my-4">
+        <h1 style="text-align: center;">Constellations, visible at your sight ({{how_many}} / 88)</h1>
+    </div>
+
+    <ul class="list-group container">
+        {% for elem in visible %}
+            {% if forloop.counter0|divisibleby:4 %}
+                </div>
+            {% endif %}
+
+            {% if forloop.counter0|divisibleby:4 or forloop.first %}
+                <div class="row justify-content-center align-items-center" data-bs-theme="dark">
+            {% endif %}
+                    {% include 'mainApp/obj_card.html' with elem=elem %}
+        {% endfor %}
+    </ul>
+
+{% endblock %}

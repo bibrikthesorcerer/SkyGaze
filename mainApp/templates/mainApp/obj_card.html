@@ -1,0 +1,28 @@
+
+{% load static %}
+{% load filters %}
+
+<div class="card card-constell col-5 my-2 mx-2" style="width: 18rem;">
+    {% if elem|is_VisibleConstell %}
+        <img src="{% static 'constells/'|add:elem.db_info.name|replace:' ,_' %}.png" class="card-img-top">
+        <div class="card-body align-items-center">
+            <h5 class="card-title">{{elem.db_info.name}}</h5>
+            
+            <p class="card-text">
+                Azimuth:    {{elem.az}}<br>Altitude:   {{elem.alt}}
+            </p>
+            <a target="_blank" id="moreInfoTrigger" rel="noopener noreferrer" class="btn btn-primary" data-constell-id={{elem.db_info.constell_id}}  data-bs-target="#moreInfoModal">More</a>
+        {% else %}
+        <img src="{% static 'constells/'|add:elem.name|replace:' ,_' %}.png" class="card-img-top">
+        <div class="card-body align-items-center" >
+    
+            <h5 class="card-title">{{elem.name}}</h5>
+            
+            <p class="card-text">
+            </p>
+            <a target="_blank" id="moreInfoTrigger" rel="noopener noreferrer" class="btn btn-primary" data-constell-id={{elem.constell_id}}  data-bs-target="#moreInfoModal">More</a>
+        {% endif %}
+
+    </div>
+</div>
+

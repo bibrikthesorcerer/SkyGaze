@@ -1,0 +1,140 @@
+body {
+  background: #090C08 !important;
+}
+
+.big-h1{
+  font-size: 7vw !important;
+}
+
+h1 {
+  color: #E0E1DD;
+}
+
+.text-dimmed {
+  color: rgb(224, 225, 221, 0.6) !important;
+}
+
+@media (max-width: 992px) {
+  h1 {
+      font-size: 5vw;
+  }
+}
+
+.c-item {
+  height: 520px;
+  padding: 0px;
+}
+
+.c-img {
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+}
+
+.carousel-container {
+  position: relative;
+  height:  400px;
+}
+
+.carousel-caption {
+  z-index: 20;
+  position: absolute;
+  top:  120px;
+  left:  50%;
+  transform: translateX(-50%);
+}
+
+.no-select{
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */     
+}
+
+.card-info {
+  min-width: 20vw;
+  max-width: 20vw;
+ }
+
+ .card-constell {
+  background-color: transparent;
+ }
+
+ #spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200000;
+  transition: opacity 0.2s, visibility 0.2s;
+ }
+
+ .hidden {
+  opacity: 0;
+  visibility: hidden;
+ }
+
+ .loader {
+  z-index: 200000;
+  animation: rotate 10s infinite linear;
+  transform-origin: center center;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.heading-regular {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.heading-semibold{
+ font-family: "Cormorant Garamond", serif;
+ font-weight: 600;
+ font-style: normal;
+}
+
+h1,h2 {
+  font-family: "Wix Madefor Display", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+
+h3,h4,h5,h6,a,input,div{
+  font-family: "Raleway", sans-serif !important;
+  font-optical-sizing: auto;
+  font-weight: 500 !important;
+  font-style: normal !important;
+}
+
+
+#overlay {
+  width:100%;
+  height:100%;
+  background:#000;
+  position:fixed;
+  top:50;
+  left:0;
+  z-index: 10001;
+  display:none;
+  transition: opacity 0.2s, visibility 0.2s;
+    opacity:0.5;
+    filter:alpha(opacity=50);
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+    filter: none !important;
+}
+
+.carousel-indicators {
+  bottom: -45px;
+}

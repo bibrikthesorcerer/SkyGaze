@@ -1,0 +1,132 @@
+<!--Start of Modal window-->
+{% load static %}
+<div class="modal fade text-white no-select" data-bs-theme="dark" tabindex="-1", id="date-coord-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Observation info</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        
+            <div class="modal-body row g-2">
+        
+                <form action="/session/" method="post" id="modalForm" class="needs-validation" novalidate>
+                {% csrf_token %}
+                
+                <div class="input-group">
+                    <button id="resetCoord" type="button" class="btn btn-secondary input-group-text px-4" data-bs-toggle="tooltip" data-bs-title="Reset coordinate values" data-bs-placement="left">
+                    <img src="{% static 'pinpoint.png' %}" width="15" height="20">
+                    </button>
+                    
+                    <div class="form-floating">
+                    <input id="latitude" type="latitude"  class="form-control" placeholder="Latitude" name="lat" pattern="^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$" required>
+                    <label for="latitude">Latitude</label>
+                    <div class="invalid-tooltip">
+                        Please enter a valid latitude (-90 to 90)
+                    </div>
+                    </div>
+
+                    <div class="form-floating">
+                    <input id="longtitude" type="longtitude"  class="form-control" placeholder="Longtitude" name="long" pattern="^-?([0-9]{1,2}|1[0-7][0-9]|180)\.{1}\d{1,6}$" required>
+                    <label for="longtitude">Longtitude</label>
+                    <div class="invalid-tooltip">
+                        Please enter a valid longtitude (-180 to 180)
+                    </div>
+                    </div>
+        
+                </div>
+        
+                <div class="input-group mt-3">
+                    <button id="resetButton" type="button" class="btn btn-secondary input-group-text px-4" data-bs-toggle="tooltip" data-bs-title="Reset time and date values to real time and date" data-bs-placement="left">⟳</button>
+
+                    <div class="form-floating w-25">
+                    <input id="current time" type="time" class="form-control" value="{{ TIME }}" min="00:00:00" max="23:59:59" step="1" placeholder="Time" name="time" required>
+                    <label for="time">Local Time</label>
+                    </div>
+
+                    <div class="form-floating w-25">
+                    <input id="current date" type="date" class="form-control" value="{{ DATE }}" min="1965-01-01" max="2099-12-31" placeholder="Date" name="date" required>
+                    <label for="date">Date</label>
+                    </div>   
+        
+                </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" form="modalForm">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Modal window's script-->
+<script>
+    // Init tooltips
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
+    var timeInput = document.getElementById('current time');
+    var dateInput = document.getElementById('current date');
+
+    var resetButton = document.getElementById('resetButton');
+    var resetCoord = document.getElementById('resetCoord');
+
+    var timeInterval;
+  
+    function updateDate() {
+      var now = new Date();
+      var year = now.getFullYear();
+      var month = now.getMonth() +  1; // Months are  0-based in JavaScript
+      var day = now.getDate();
+      // Ensure month and day are two digits
+      month = month <  10 ? '0' + month : month;
+      day = day <  10 ? '0' + day : day;
+      var date = year + '-' + month + '-' + day;
+      dateInput.value = date;
+  }
+  
+  
+    function updateTime() {
+        var now = new Date();
+        var time = now.toTimeString().split(' ')[0];
+        timeInput.value = time;
+        if (time == "00:00:00"){
+          updateDate();
+        }
+  
+    }
+
+    document.getElementById('modalForm').addEventListener('submit', function(event) {
+    if (!this.checkValidity()) {
+        event.preventDefault(); // Prevent form submission
+        event.stopPropagation(); // Stop further propagation
+    }
+    this.classList.add('was-validated'); // Add Bootstrap validation class
+    });
+
+    // Start the interval
+    timeInterval = setInterval(updateTime,  1000);
+  
+    // Stop the interval when the input is focused
+    timeInput.addEventListener('focus', function() {
+        clearInterval(timeInterval);
+    });
+    
+    resetCoord.addEventListener('click', function(){
+        var long = document.getElementById('longtitude');
+        var lat = document.getElementById('lattitude');
+        long.value = "";
+        lat.value = "";
+    });
+
+    // Reset button functionality
+    resetButton.addEventListener('click', function() {
+        clearInterval(timeInterval); // Stop the current interval
+        updateDate();
+        timeInterval = setInterval(updateTime,  1000); // Restart the interval
+    });
+  </script>
+
+<!--End of Modal window-->
